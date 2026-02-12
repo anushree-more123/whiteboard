@@ -32,8 +32,6 @@ This application allows users to draw shapes, freehand sketch, add text, customi
 - **Redux Toolkit**
 - **Fabric.js v7**
 - **Material UI (MUI)**
-- **Styled Components**
-- **UUID**
 
 ---
 
@@ -44,3 +42,11 @@ npm install
 
 npm start
 ```
+
+---
+
+## 📸 Output
+
+![Whiteboard Screenshot](./output/screenshot.png)
+
+---
