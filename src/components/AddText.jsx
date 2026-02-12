@@ -1,5 +1,3 @@
-import { LensOutlined } from "@mui/icons-material";
-import React from "react";
 import { StyledIconBox } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { whiteboardActions } from "./WhiteboardSlice";

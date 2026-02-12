@@ -1,8 +1,5 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Delete } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
 import { StyledIconBox } from "./style";
-import { whiteboardActions } from "./WhiteboardSlice";
 import { handleDeleteShape } from "./WhiteboardActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";

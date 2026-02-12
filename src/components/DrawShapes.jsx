@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { StyledIconBox, StyledShapeCard } from "./style";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { Box, Menu } from "@mui/material";
 import {
   ArrowForwardIos,

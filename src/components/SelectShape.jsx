@@ -1,6 +1,5 @@
 import React from "react";
 import { StyledIconBox } from "./style";
-import { NorthWest } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { whiteboardActions } from "./WhiteboardSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

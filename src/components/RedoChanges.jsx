@@ -1,4 +1,3 @@
-import React from "react";
 import { StyledIconBox } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { whiteboardActions } from "./WhiteboardSlice";
@@ -8,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const RedoChanges = () => {
   const dispatch = useDispatch();
   const { canvas, undoActions, redoActions } = useSelector(
-    (state) => state.whiteboard
+    (state) => state.whiteboard,
   );
   const handleRedoChanges = () => {
     const undoActionsCopy = [...undoActions];
@@ -40,7 +39,6 @@ const RedoChanges = () => {
       style={{ border: 0 }}
       disabled={redoActions.length == 0 ? true : false}
     >
-      {" "}
       <FontAwesomeIcon icon={faRotateRight} fontSize={"1.2rem"} />
     </StyledIconBox>
   );

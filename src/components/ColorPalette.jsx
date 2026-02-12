@@ -1,7 +1,7 @@
-import { Box, Menu, MenuItem, Slider, Stack, Typography } from "@mui/material";
+import { Box, Menu, Slider, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { StyledColorCard, StyledIconBox } from "./style";
-import { ArrowForward, ArrowForwardIos, ColorLens } from "@mui/icons-material";
+import { ArrowForwardIos, ColorLens } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { whiteboardActions } from "./WhiteboardSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 const ColorPalette = () => {
   const dispatch = useDispatch();
   const { selectedColor, actionType, canvas, thicknessValue } = useSelector(
-    (state) => state.whiteboard
+    (state) => state.whiteboard,
   );
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -71,7 +71,7 @@ const ColorPalette = () => {
     }
   };
   return (
-    <div>
+    <Box>
       <StyledIconBox
         onClick={(e) => handleClick(e)}
         sx={{ position: "relative" }}
@@ -126,7 +126,7 @@ const ColorPalette = () => {
           ))}
         </Box>
       </Menu>
-    </div>
+    </Box>
   );
 };
 

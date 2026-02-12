@@ -1,5 +1,4 @@
-import { HorizontalRule, LensOutlined } from "@mui/icons-material";
-import React from "react";
+import { HorizontalRule } from "@mui/icons-material";
 import { StyledIconBox } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { whiteboardActions } from "./WhiteboardSlice";

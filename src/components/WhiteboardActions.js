@@ -2,9 +2,6 @@ import { whiteboardActions } from "./WhiteboardSlice";
 import { Rect, Circle, Triangle, Line, IText } from "fabric";
 import { v4 as uuidv4 } from "uuid";
 
-/* =========================
-   MOUSE DOWN
-========================= */
 export const mouseDown = (event) => {
   return (dispatch, getState) => {
     const { actionType, selectedColor, thicknessValue, canvas } =
@@ -12,7 +9,6 @@ export const mouseDown = (event) => {
 
     if (!canvas) return;
 
-    // ✅ Fabric v7 SAFE pointer
     const point = canvas.getScenePoint(event);
     if (!point) return;
 
@@ -108,9 +104,6 @@ export const mouseDown = (event) => {
   };
 };
 
-/* =========================
-   MOUSE MOVE
-========================= */
 export const mouseMove = (event) => {
   return (dispatch, getState) => {
     const { started, actionType, x, y, canvas } = getState().whiteboard;
@@ -118,41 +111,46 @@ export const mouseMove = (event) => {
     if (!started || !canvas) return;
     if (actionType === "draw-with-pen" || actionType === "select-shape") return;
 
-    // ✅ Fabric v7 SAFE pointer
     const point = canvas.getScenePoint(event);
     if (!point) return;
 
     const currentX = point.x;
     const currentY = point.y;
 
-    const width = Math.abs(currentX - x);
-    const height = Math.abs(currentY - y);
+    const deltaX = currentX - x;
+    const deltaY = currentY - y;
 
-    if (!width || !height) return;
+    const absWidth = Math.abs(deltaX);
+    const absHeight = Math.abs(deltaY);
 
     const shape = canvas.getActiveObject();
     if (!shape) return;
 
-    shape.set({
-      width,
-      height,
-    });
+    const newLeft = deltaX < 0 ? currentX : x;
+    const newTop = deltaY < 0 ? currentY : y;
 
     if (actionType === "draw-circle" || actionType === "draw-fill-circle") {
-      let radius = Math.max(width, height) / 2;
-      if (radius > shape.strokeWidth) {
-        radius -= shape.strokeWidth / 2;
-      }
-      shape.set({ radius });
+      const radius = Math.max(absWidth, absHeight) / 2;
+
+      shape.set({
+        radius,
+        left: x - radius,
+        top: y - radius,
+      });
+    } else {
+      shape.set({
+        left: newLeft,
+        top: newTop,
+        width: absWidth,
+        height: absHeight,
+      });
     }
 
+    shape.setCoords();
     canvas.requestRenderAll();
   };
 };
 
-/* =========================
-   MOUSE UP
-========================= */
 export const mouseUp = () => {
   return (dispatch, getState) => {
     const { started, actionType, canvas, undoActions } = getState().whiteboard;
@@ -183,9 +181,6 @@ export const mouseUp = () => {
   };
 };
 
-/* =========================
-   FREE DRAW PATH
-========================= */
 export const getFreeDrawingPath = (event) => {
   return (dispatch, getState) => {
     const { undoActions } = getState().whiteboard;
@@ -199,9 +194,6 @@ export const getFreeDrawingPath = (event) => {
   };
 };
 
-/* =========================
-   DELETE SHAPE
-========================= */
 export const handleDeleteShape = () => {
   return (dispatch, getState) => {
     const { canvas, undoActions } = getState().whiteboard;
@@ -223,9 +215,6 @@ export const handleDeleteShape = () => {
   };
 };
 
-/* =========================
-   CLEAR TEXT PLACEHOLDER
-========================= */
 export const clearText = (event) => {
   return (dispatch, getState) => {
     const { canvas } = getState().whiteboard;
